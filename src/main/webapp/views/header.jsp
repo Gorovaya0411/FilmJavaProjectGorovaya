@@ -10,6 +10,14 @@
 </head>
 <body>
 <!-- Header -->
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<!-- jQuery -->
+<script defer src="js/jquery-3.6.4.js"></script>
+<!-- Bootstrap JS + Popper JS -->
+8
+<script defer src="js/bootstrap.bundle.min.js"></script>
+
 <a href="/persons/">
 <img alt="Логотип" id="top-image" src="images/main.png" width="50">
 </a>
@@ -23,6 +31,10 @@ height="80" >
  <h2>Фильмы</h2>
  </div>
 </nav>
+<button type="button" class="btn btn-primary" data-toggle="popover"
+title="Сообщение" data-content="Ура, Bootstrap 5 работает">
+Поднеси ко мне курсор
+</button>
 <!-- /Header -->
 </body>
 </html>
