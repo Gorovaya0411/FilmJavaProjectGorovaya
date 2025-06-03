@@ -15,7 +15,7 @@
 <!-- jQuery -->
 <script defer src="js/jquery-3.6.4.js"></script>
 <!-- Bootstrap JS + Popper JS -->
-8
+
 <script defer src="js/bootstrap.bundle.min.js"></script>
 
 <a href="/persons/">
