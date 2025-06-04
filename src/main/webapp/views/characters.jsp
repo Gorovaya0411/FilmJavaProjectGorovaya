@@ -82,19 +82,25 @@
                                 <input type="text" class="form-control" id="status" name="status" />
                             </div>
                         </div>
-                        <div class="mb-3 row">
-                            <label for="movie" class="col-sm-3 col-form-label">Фильм</label>
+                             <div class="mb-3 row">
+                            <label for="id" class="col-sm-3 col-form-label">Код</label>
                             <div class="col-sm-7">
-                                <select name="films" class="form-control">
-                                    <option>Выберите фильм</option>
-                                    <c:forEach var="films" items="${films}">
-                                        <option value="${films.getId()}">
-                                            <c:out value="${films.getTitle()}"/>
-                                        </option>
-                                    </c:forEach>
-                                </select>
+                                <input type="number" class="form-control" id="id" name="id" />
                             </div>
                         </div>
+                   <div class="mb-3 row">
+    <label for="films" class="col-sm-3 col-form-label">Фильм</label>
+    <div class="col-sm-7">
+        <select name="films" class="form-control" required>
+            <option value="">Выберите фильм</option>
+            <c:forEach var="film" items="${films}">
+                <option value="${film.id}">
+                    ${film.title}
+                </option>
+            </c:forEach>
+        </select>
+    </div>
+</div>
                         <p><br>
                             <button type="submit" class="btn btn-primary">Добавить</button>
                         </p>

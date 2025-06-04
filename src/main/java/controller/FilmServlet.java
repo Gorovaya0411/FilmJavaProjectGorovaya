@@ -53,12 +53,40 @@ ConnectionProperty prop;
 		 
 		 }
  
- protected void doPost(HttpServletRequest request,
-		 HttpServletResponse response)
-		 
-		 throws ServletException, IOException {
-		 // TODO Auto-generated method stub
-		 doGet(request, response);
-		 }
+ protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	        throws ServletException, IOException {
+	    FilmDbDAO dao = new FilmDbDAO();
+	    
+	    // Получаем параметры из формы
+	    String title = request.getParameter("title");
+	    int releaseYear = Integer.parseInt(request.getParameter("release_year"));
+	    String director = request.getParameter("director");
+	    String genre = request.getParameter("genre");
+	    
+	    // Создаем новый объект Film
+	    Film newFilm = new Film();
+	    newFilm.setId(5l);
+	    newFilm.setTitle(title);
+	    newFilm.setReleaseYear(releaseYear);
+	    newFilm.setDirector(director);
+	    newFilm.setGenre(genre);
+	    
+	    try {
+	        // Добавляем фильм в базу данных
+	        Long index = dao.insert(newFilm);
+	        System.out.println("Фильм успешно добавлен. ID: " + index);
+	        
+	        // Перенаправляем на страницу с обновленным списком
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/film.jsp");
+		    dispatcher.include(request, response);
+	 
+	        
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        // В случае ошибки сохраняем сообщение и возвращаем на форму
+	        request.setAttribute("errorMessage", "Ошибка при добавлении фильма: " + e.getMessage());
+	        request.getRequestDispatcher("/views/film.jsp").forward(request, response);
+	    }
+	}
 
 }

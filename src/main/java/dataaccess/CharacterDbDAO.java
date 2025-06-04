@@ -44,17 +44,20 @@ public class CharacterDbDAO implements RepositoryDAO<Character> {
     public Long insert(Character character) throws Exception {
         try (Connection con = getConnection();
              PreparedStatement pst = con.prepareStatement(INSERT_CHARACTER, new String[] { "id" })) {
-            
-            pst.setLong(1, character.getMovie().getId());
+            System.out.println(character);
+           // pst.setLong(1, character.getId());
+            pst.setLong(1, 5L);
             pst.setString(2, character.getCharacterName());
             pst.setString(3, character.getActorName());
             pst.setString(4, character.getStatus());
+            
             pst.executeUpdate();
             
+         
             ResultSet gk = pst.getGeneratedKeys();
             Long id = -1L;
             if (gk.next()) {
-                id = gk.getLong("id");
+                id = 5L;
             }
             gk.close();
             return id;

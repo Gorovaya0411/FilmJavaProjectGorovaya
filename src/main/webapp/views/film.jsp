@@ -61,13 +61,33 @@ pageEncoding="UTF-8"%>
  <div class="col-4 border px-4">
  <form method="POST" action="">
  <h3>Новый фильм</h3>
- <div class="mb-3">
- <br> <label for="inputRole"
- class="col-sm-3 col-form-label">Фильм</label>
-<div class="col-sm-6">
-    <input type="text" name="inputFilm" class="form-control" id="filmsFilm" />
+<div class="mb-3">
+    <label for="inputTitle" class="col-sm-3 col-form-label">Название фильма</label>
+    <div class="col-sm-6">
+        <input type="text" name="title" class="form-control" id="inputTitle" maxlength="100" required />
+    </div>
 </div>
- </div>
+
+<div class="mb-3">
+    <label for="inputYear" class="col-sm-3 col-form-label">Год выпуска</label>
+    <div class="col-sm-6">
+        <input type="number" name="release_year" class="form-control" id="inputYear" min="1900" max="2030" required />
+    </div>
+</div>
+
+<div class="mb-3">
+    <label for="inputDirector" class="col-sm-3 col-form-label">Режиссер</label>
+    <div class="col-sm-6">
+        <input type="text" name="director" class="form-control" id="inputDirector" maxlength="50" required />
+    </div>
+</div>
+
+<div class="mb-3">
+    <label for="inputGenre" class="col-sm-3 col-form-label">Жанр</label>
+    <div class="col-sm-6">
+        <input type="text" name="genre" class="form-control" id="inputGenre" maxlength="30" required />
+    </div>
+</div>
  <p>
  <br> <br> <br>
  <button type="submit"

@@ -3,6 +3,7 @@ package controller;
 import domain.Character;
 import domain.Film;
 import exception.DAOException;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -61,10 +62,66 @@ public class CharacterServlet extends HttpServlet {
         
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        CharacterDbDAO daoCharacter = new CharacterDbDAO();
+        FilmDbDAO daoFilm = new FilmDbDAO();
+        
+        try {
+            // Получаем список всех фильмов для выпадающего списка
+            List<Film> films = daoFilm.findAll();
+            request.setAttribute("films", films);
+            
+            // Получаем параметры из формы
+            String characterName = request.getParameter("characterName");
+            String actorName = request.getParameter("actorName");
+            String status = request.getParameter("status");
+            String filmParam = request.getParameter("films");
+            String id = request.getParameter("id");
+            
+            String digitsOnly = filmParam.replaceAll("\\D+", "");
+            Long filmId;
+            if (!digitsOnly.isEmpty()) {
+                filmId = Long.parseLong(digitsOnly);
+            } else {
+                throw new ServletException("Не удалось извлечь ID фильма из параметра: " + filmParam);
+            }
+            
+            String digitsOnlyId = id.replaceAll("\\D+", "");
+            Long idId;
+            if (!digitsOnlyId.isEmpty()) {
+            	idId = Long.parseLong(digitsOnlyId);
+            } else {
+                throw new ServletException("Не удалось извлечь ID фильма из параметра: " + id);
+            }
+            
+            // Находим полный объект Film по ID
+            Film film = findById(filmId, films);
+            
+            // Создаем нового персонажа
+            Character newCharacter = new Character();
+            newCharacter.setId(idId);
+            newCharacter.setCharacterName(characterName);
+            newCharacter.setActorName(actorName);
+            newCharacter.setStatus(status);
+            newCharacter.setMovie(film);
+            
+            // Добавляем персонажа в базу данных
+            Long index = daoCharacter.insert(newCharacter);
+            System.out.println("Персонаж успешно добавлен. ID: " + index);
+            // Перенаправляем на страницу с обновленным списком
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/characters.jsp");
+		    dispatcher.include(request, response);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("error", "Ошибка при добавлении персонажа: " + e.getMessage());
+        }
+        
         doGet(request, response);
     }
+
+ 
     
     /**
      * Метод для поиска фильма в коллекции по id
