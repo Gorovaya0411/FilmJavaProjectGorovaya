@@ -1,4 +1,5 @@
 package controller;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,14 +11,14 @@ import java.io.PrintWriter;
 /**
 * Servlet implementation class DirectorServlet_
 */
-@WebServlet("/DirectorServlet")
-public class DirectorServlet extends HttpServlet {
+@WebServlet("/film")
+public class FilmServlet extends HttpServlet {
 private static final long serialVersionUID = 1L;
 
  /**
  * @see HttpServlet#HttpServlet()
  */
- public DirectorServlet() {
+ public FilmServlet() {
  super();
  // TODO Auto-generated constructor stub
  }
@@ -27,13 +28,10 @@ HttpServletResponse response)
 */
 protected void doGet(HttpServletRequest request,
 HttpServletResponse response) throws ServletException, IOException {
- response.setContentType("text/html");
- PrintWriter writer = response.getWriter();
- try {
- writer.println("<h2>Привет это сервлет DirectorServlet - в приложении по фильмам</h2>");
- } finally {
- writer.close();
- }
+	request.setAttribute("SomeData", response);
+	
+	RequestDispatcher dispatcher = request.getRequestDispatcher("/views/film.jsp");
+	dispatcher.include(request, response);
 }
 /**
 * @see HttpServlet#doPost(HttpServletRequest request,
