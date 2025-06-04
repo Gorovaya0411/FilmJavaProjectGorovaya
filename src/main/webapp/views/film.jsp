@@ -2,15 +2,7 @@
 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="domain.Film"%>
-<%
-Film r1 = new Film(1L, "Крестный отец", 1972, "Фрэнсис Форд Коппола", "Криминальная драма");
-Film r2 = new Film(2L, "Побег из Шоушенка", 1994, "Фрэнк Дарабонт", "Драма");
-Film r3= new Film(3L, "Темный рыцарь", 2008, "Кристофер Нолан", "Боевик");
-Film r4 = new Film(4L, "Начало", 2010, "Кристофер Нолан", "Фантастика");
-Film[] films = new Film[]{r1, r2, r3, r4};
-int length = films.length;
-pageContext.setAttribute("films", films);
-%>
+
 <!DOCTYPE html>
 <html>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">

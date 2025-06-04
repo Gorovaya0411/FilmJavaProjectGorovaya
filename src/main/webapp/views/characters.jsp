@@ -3,23 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="domain.Film"%>
 <%@ page import="domain.Character"%>
-<%
-Film m1 = new Film(1L, "Крестный отец", 1972, "Фрэнсис Форд Коппола", "Криминальная драма");
-Film m2 = new Film(2L, "Побег из Шоушенка", 1994, "Фрэнк Дарабонт", "Драма");
-Film m3= new Film(3L, "Темный рыцарь", 2008, "Кристофер Нолан", "Боевик");
-Film m4 = new Film(4L, "Начало", 2010, "Кристофер Нолан", "Фантастика");
 
-Film[] movies = new Film[]{m1, m2, m3, m4};
-pageContext.setAttribute("movies", movies);
-
-Character ch1 = new Character(1L, "Дон Корлеоне", "Марлон Брандо", "Главный герой", m1);
-Character ch2 = new Character(2L, "Энди Дюфрейн", "Тим Роббинс", "Протагонист", m2);
-Character ch3 = new Character(3L, "Джокер", "Хит Леджер", "Антагонист", m3);
-Character ch4 = new Character(4L, "Доминик Кобб", "Леонардо ДиКаприо", "Главный герой", m4);
-
-Character[] characters = new Character[]{ch1, ch2, ch3, ch4};
-pageContext.setAttribute("characters", characters);
-%>
 <!DOCTYPE html>
 <html>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
@@ -101,11 +85,11 @@ pageContext.setAttribute("characters", characters);
                         <div class="mb-3 row">
                             <label for="movie" class="col-sm-3 col-form-label">Фильм</label>
                             <div class="col-sm-7">
-                                <select name="movie" class="form-control">
+                                <select name="films" class="form-control">
                                     <option>Выберите фильм</option>
-                                    <c:forEach var="movie" items="${movies}">
-                                        <option value="${movie.getId()}">
-                                            <c:out value="${movie.getTitle()}"/>
+                                    <c:forEach var="films" items="${films}">
+                                        <option value="${films.getId()}">
+                                            <c:out value="${films.getTitle()}"/>
                                         </option>
                                     </c:forEach>
                                 </select>
