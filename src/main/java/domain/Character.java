@@ -67,7 +67,7 @@ public class Character {
 
     @Override
     public String toString() {
-        return "Character {" + 
+        return "Character  {" + 
                "Id = " + id + 
                ", CharacterName = " + characterName + 
                ", ActorName = " + actorName + 
