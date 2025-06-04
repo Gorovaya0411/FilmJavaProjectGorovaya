@@ -43,10 +43,10 @@ public class CharacterDbDAO implements RepositoryDAO<Character> {
     @Override
     public Long insert(Character character) throws Exception {
         try (Connection con = getConnection();
-             PreparedStatement pst = con.prepareStatement(INSERT_CHARACTER, new String[] { "id" })) {
+            PreparedStatement pst = con.prepareStatement(INSERT_CHARACTER, new String[] { "id" })) {
             System.out.println(character);
            // pst.setLong(1, character.getId());
-            pst.setLong(1, 5L);
+            pst.setLong(1, character.getMovie().getId());
             pst.setString(2, character.getCharacterName());
             pst.setString(3, character.getActorName());
             pst.setString(4, character.getStatus());
@@ -57,7 +57,7 @@ public class CharacterDbDAO implements RepositoryDAO<Character> {
             ResultSet gk = pst.getGeneratedKeys();
             Long id = -1L;
             if (gk.next()) {
-                id = 5L;
+                id = gk.getLong("id");
             }
             gk.close();
             return id;

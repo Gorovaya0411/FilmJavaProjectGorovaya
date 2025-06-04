@@ -45,14 +45,21 @@ pageEncoding="UTF-8"%>
  <td>${film.getReleaseYear()}</td>
  <td>${film.getDirector()}</td>
  <td>${film.getGenre()}</td>
- <td width="20"><a href="#" role="button"
- class="btn btn-outline-primary">
- <img alt="Редактировать"
- src="images/icon-edit.png" width="20"></a></td>
- <td width="20"><a href="#" role="button"
- class="btn btn-outline-primary">
- <img alt="Удалить" 
- src="images/icon-delete.png" width="20"></a></td>
+<td width="20"><a
+href='<c:url value="/editfilm?id=${film.getId()}" />'
+role="button" class="btn btn-outline-primary">
+<img alt="Редактировать"
+src="images/icon-edit.png" width="20"></a></td>
+
+ 
+<td width="20">
+    <a href='<c:url value="/deletefilm?id=${film.getId()}"/>' 
+       role="button" 
+       class="btn btn-outline-primary"
+       onclick="return confirm('Удалить фильм с кодом: ${film.getId()}?')">
+        <img alt="Удалить" src="images/icon-delete.png" width="20">
+    </a>
+</td>
  </tr>
  </c:forEach>
  </tbody>
